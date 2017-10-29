@@ -9,9 +9,7 @@ module.exports = env => {
         entry: 'prepend'
     })(commonConfig, {
         entry: {
-            app: [
-                'react-hot-loader/patch'
-            ],
+            app: ['react-hot-loader/patch'],
         },
         devServer: {
             contentBase: path.join(__dirname, "dist"),
