@@ -24,7 +24,9 @@ module.exports = env => {
     return {
         devtool: isProduction ? false : 'cheap-module-eval-source-map',
         entry: {
-            app: './src/index.js',
+            app: [
+                './src/index.jsx'
+            ],
             vendor: vendor,
         },
         plugins: [
@@ -47,10 +49,21 @@ module.exports = env => {
         ],
         output: {
             filename: isProduction ? '[name].[chunkhash].js' : '[name].js',
-            path: path.resolve(__dirname, 'dist')
+            path: path.resolve(__dirname, 'dist'),
+            publicPath: '/'
         },
         module: {
             rules: [{
+                    test: /\.jsx?$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: "babel-loader",
+                        options: {
+                            cacheDirectory: true
+                        }
+                    }
+                },
+                {
                     test: /\.scss$/,
                     use: extractSass.extract({
                         use: [{

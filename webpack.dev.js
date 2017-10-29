@@ -5,7 +5,14 @@ const merge = require('webpack-merge');
 module.exports = env => {
     const commonConfig = require('./webpack.common')(env);
 
-    return merge(commonConfig, {
+    return merge.strategy({
+        entry: 'prepend'
+    })(commonConfig, {
+        entry: {
+            app: [
+                'react-hot-loader/patch'
+            ],
+        },
         devServer: {
             contentBase: path.join(__dirname, "dist"),
             compress: true,
