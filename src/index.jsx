@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader'
 
-import App from './containers/App.jsx';
+import App from 'containers/App';
 
-import './style.scss';
+import 'style.scss';
 
 const render = Component => {
   ReactDOM.render(
@@ -19,5 +19,5 @@ render(App)
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./containers/App.jsx', () => { render(App) })
+  module.hot.accept('containers/App', () => { render(App) })
 }

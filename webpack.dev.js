@@ -14,7 +14,8 @@ module.exports = env => {
         devServer: {
             contentBase: path.join(__dirname, "dist"),
             compress: true,
-            hot: true
+            hot: true,
+            historyApiFallback: true
         },
         plugins: [
             new webpack.NamedModulesPlugin(),

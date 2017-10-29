@@ -5,8 +5,8 @@ import {
     Link
 } from 'react-router-dom';
 
-import Home from './Home.jsx';
-import About from './About.jsx';
+import Home from 'containers/Home';
+import About from 'containers/About';
 
 class App extends Component {
     render() {

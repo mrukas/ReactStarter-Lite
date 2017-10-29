@@ -47,6 +47,10 @@ module.exports = env => {
                 minChunks: Infinity
             })
         ],
+        resolve: {
+            modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+            extensions: ['.js', '.jsx', '.json', '*']
+        },
         output: {
             filename: isProduction ? '[name].[chunkhash].js' : '[name].js',
             path: path.resolve(__dirname, 'dist'),
@@ -57,7 +61,7 @@ module.exports = env => {
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
                     use: {
-                        loader: "babel-loader",
+                        loader: 'babel-loader',
                         options: {
                             cacheDirectory: true
                         }
