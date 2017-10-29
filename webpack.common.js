@@ -6,10 +6,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const vendor = require('./src/vendor');
 
 module.exports = env => {
-    console.log(`Env: ${env}`);
+    const buildConfig = require('./build.config.js')(env);
     const isProduction = env === 'production';
-
-    console.log(`IsProduction: ${isProduction}`);
 
     const extractSass = new ExtractTextPlugin({
         filename: '[name].[contenthash].css',
@@ -36,7 +34,8 @@ module.exports = env => {
                 title: 'Output Management',
                 template: 'src/index.ejs',
                 chunksSortMode: 'manual',
-                chunks: ['runtime', 'vendor', 'app']
+                chunks: ['runtime', 'vendor', 'app'],
+                publicPath: buildConfig.publicPath
             }),
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'vendor',
@@ -54,7 +53,7 @@ module.exports = env => {
         output: {
             filename: isProduction ? '[name].[chunkhash].js' : '[name].js',
             path: path.resolve(__dirname, 'dist'),
-            publicPath: '/'
+            publicPath: buildConfig.publicPath
         },
         module: {
             rules: [{

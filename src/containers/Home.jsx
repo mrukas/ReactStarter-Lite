@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
+import { isProduction } from '../globals';
+
 class Home extends Component {
     render() {
         return (
-            <h1>Home</h1>
+            <div>
+                <h1>Home</h1>
+                <span>IsProduction: {isProduction ? "yes" : "no"}</span>
+            </div>
         );
     }
 }
