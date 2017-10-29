@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { isProduction } from '../globals';
+import { isProduction } from 'globals';
 
 class Home extends Component {
     render() {
