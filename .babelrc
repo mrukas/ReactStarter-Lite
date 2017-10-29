@@ -3,7 +3,11 @@
         ["env", {
             "modules": false
         }],
-        "react"
+        "react",
+        "stage-3"
     ],
-    "plugins": ["react-hot-loader/babel"]
+    "plugins": [
+        "react-hot-loader/babel",
+        "transform-class-properties"
+    ]
 }
