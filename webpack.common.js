@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const vendor = require('./src/vendor');
 
@@ -44,7 +45,8 @@ module.exports = env => {
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'runtime',
                 minChunks: Infinity
-            })
+            }),
+            //new BundleAnalyzerPlugin()
         ],
         resolve: {
             modules: [path.resolve(__dirname, 'src'), 'node_modules'],
