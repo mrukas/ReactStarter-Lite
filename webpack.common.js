@@ -36,7 +36,8 @@ module.exports = env => {
                 template: 'src/index.ejs',
                 chunksSortMode: 'manual',
                 chunks: ['runtime', 'vendor', 'app'],
-                publicPath: buildConfig.publicPath
+                publicPath: buildConfig.publicPath,
+                baseHref: buildConfig.baseHref
             }),
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'vendor',
