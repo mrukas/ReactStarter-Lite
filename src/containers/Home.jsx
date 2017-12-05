@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { isProduction } from 'globals';
+import { isProduction, version } from 'globals';
 
 class Home extends Component {
     render() {
@@ -8,6 +8,7 @@ class Home extends Component {
             <div>
                 <h1>Home</h1>
                 <span>IsProduction: {isProduction ? "yes" : "no"}</span>
+                <p>Version: {version}</p>
             </div>
         );
     }
