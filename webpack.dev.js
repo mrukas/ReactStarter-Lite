@@ -19,7 +19,15 @@ module.exports = env => {
         },
         plugins: [
             new webpack.NamedModulesPlugin(),
-            new webpack.HotModuleReplacementPlugin()
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'NODE_ENV': JSON.stringify('development')
+                },
+                'GIT_VERSION': JSON.stringify(''),
+                'GIT_COMMITHASH': JSON.stringify(''),
+                'GIT_BRANCH': JSON.stringify(''),
+            })
         ]
     });
 }
