@@ -7,7 +7,9 @@ const GitRevisionPlugin = require('git-revision-webpack-plugin')
 
 const mode = 'production';
 
+const buildConfig = require('./build.config.js')(mode);
 const commonConfig = require('./webpack.common')(mode);
+
 const gitRevisionPlugin = new GitRevisionPlugin({
     commithashCommand: 'rev-parse --short HEAD'
 });
@@ -15,7 +17,7 @@ const gitRevisionPlugin = new GitRevisionPlugin({
 module.exports = merge(commonConfig, {
     mode,
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin([buildConfig.buildDirectory]),
         new webpack.HashedModuleIdsPlugin(),
         new webpack.DefinePlugin({
             'GIT_VERSION': JSON.stringify(gitRevisionPlugin.version()),

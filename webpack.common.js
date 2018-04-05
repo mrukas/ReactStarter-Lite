@@ -61,7 +61,7 @@ module.exports = env => {
         },
         output: {
             filename: isProduction ? '[name].[chunkhash].js' : '[name].js',
-            path: path.resolve(__dirname, 'dist'),
+            path: path.resolve(__dirname, buildConfig.buildDirectory),
             publicPath: buildConfig.publicPath
         },
         module: {

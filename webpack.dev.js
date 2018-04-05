@@ -4,13 +4,14 @@ const merge = require('webpack-merge');
 
 const mode = 'development';
 
+const buildConfig = require('./build.config.js')(mode);
 const commonConfig = require('./webpack.common')(mode);
 
 module.exports = merge.strategy({
 })(commonConfig, {
     mode,
     devServer: {
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: path.join(__dirname, buildConfig.buildDirectory),
         compress: true,
         hot: true,
         historyApiFallback: true
