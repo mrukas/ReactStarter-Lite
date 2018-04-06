@@ -8,7 +8,7 @@
     "build:prod": "webpack --colors --config webpack.prod.js",
     "build:dev": "webpack --colors --config webpack.dev.js",
     "devserver": "webpack-dev-server --open --config webpack.dev.js",
-    "start": "run-p build:dev devserver",
+    "start": "npm run devserver",
     "clean": "del-cli dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,18 +17,18 @@
   "devDependencies": {
     "@babel/core": "~7.0.0-beta.44",
     "@babel/plugin-proposal-class-properties": "~7.0.0-beta.44",
-    "@babel/plugin-proposal-optional-chaining": "^7.0.0-beta.44",
+    "@babel/plugin-proposal-optional-chaining": "~7.0.0-beta.44",
     "@babel/preset-env": "~7.0.0-beta.44",
     "@babel/preset-react": "~7.0.0-beta.44",
     "@babel/preset-stage-3": "~7.0.0-beta.44",
-    "babel-loader": "^8.0.0-beta.2",
+    "babel-loader": "~8.0.0-beta.2",
     "clean-webpack-plugin": "~0.1.19",
     "css-loader": "~0.28.11",
     "del-cli": "~1.1.0",
     "file-loader": "~1.1.11",
     "git-revision-webpack-plugin": "~2.5.1",
     "html-webpack-plugin": "~3.2.0",
-    "mini-css-extract-plugin": "^0.4.0",
+    "mini-css-extract-plugin": "~0.4.0",
     "node-sass": "~4.8.3",
     "npm-run-all": "~4.1.2",
     "optimize-css-assets-webpack-plugin": "~4.0.0",
@@ -37,9 +37,10 @@
     "uglifyjs-webpack-plugin": "~1.2.4",
     "webpack": "~4.5.0",
     "webpack-bundle-analyzer": "~2.11.1",
-    "webpack-cli": "~2.0.13",
+    "webpack-cli": "~2.0.14",
     "webpack-dev-server": "~3.1.1",
-    "webpack-merge": "~4.1.2"
+    "webpack-merge": "~4.1.2",
+    "write-file-webpack-plugin": "~4.2.0"
   },
   "dependencies": {
     "@babel/polyfill": "~7.0.0-beta.44",

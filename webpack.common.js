@@ -2,11 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
-const vendor = require('./src/vendor');
+const vendors = require('./src/vendors');
 
 module.exports = env => {
     const buildConfig = require('./build.config.js')(env);
@@ -15,42 +12,40 @@ module.exports = env => {
     return {
         entry: {
             app: './src/index.jsx',
-            vendor: vendor,
+            vendors: vendors,
         },
         optimization: {
+            runtimeChunk: 'single',
             splitChunks: {
+                chunks: 'async',
+                minSize: 30000,
+                minChunks: 1,
+                maxAsyncRequests: 5,
+                maxInitialRequests: 3,
+                automaticNameDelimiter: '~',
+                name: true,
+
                 cacheGroups: {
-                    vendor: {
-                        name: "vendor",
-                        test: "vendor",
-                        enforce: true
+                    default: {
+                        minChunks: 2,
+                        priority: -20,
+                        reuseExistingChunk: true
                     },
-                    styles: {
-                        name: 'styles',
-                        test: /\.css$/,
+                    vendors: {
+                        name: 'vendors',
+                        test: 'vendors',
                         chunks: 'all',
                         enforce: true
                     }
                 }
-            },
-            //     minimizer: [
-            //         new UglifyJsPlugin({
-            //             cache: true,
-            //             parallel: true,
-            //           }),
-            //         new OptimizeCSSAssetsPlugin({})
-            //       ]
+            }
         },
         plugins: [
-            // new MiniCssExtractPlugin({
-            //     filename: "[name].[contenthash].css",
-            // }),
             new HtmlWebpackPlugin({
-                title: 'Output Management',
+                title: 'React Starter Lite',
                 template: 'src/index.ejs',
                 chunksSortMode: 'manual',
-                chunks: ['vendor', 'app'],
-                publicPath: buildConfig.publicPath,
+                chunks: ['runtime', 'vendors', 'app'],
                 baseHref: buildConfig.baseHref
             })
             //new BundleAnalyzerPlugin()
@@ -74,44 +69,6 @@ module.exports = env => {
                         cacheDirectory: true
                     }
                 }
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    // MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'style-loader',
-                        options: {
-                            sourceMap: !isProduction
-                        }
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: !isProduction
-                        }
-                    }, {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: !isProduction
-                        }
-                    }]
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: "style-loader",
-                        options: {
-                            sourceMap: !isProduction
-                        }
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: !isProduction
-                        }
-                    }]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,

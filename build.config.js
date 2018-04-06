@@ -2,6 +2,7 @@ module.exports = (env) => {
     let isProduction = env === 'production';
 
     return {
+        useGitVersions: false,
         buildDirectory: 'dist',
         // This should be the url of the webserver delivering the files.
         publicPathDev: 'http://localhost:8080/',
