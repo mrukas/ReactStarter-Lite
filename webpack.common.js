@@ -11,7 +11,10 @@ module.exports = env => {
 
     return {
         entry: {
-            app: './src/index.jsx',
+            app: [
+                '@babel/polyfill',
+                './src/index.jsx'
+            ],
             vendors: vendors,
         },
         optimization: {
