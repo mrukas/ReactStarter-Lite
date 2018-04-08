@@ -5,9 +5,16 @@ import {
     Link
 } from 'react-router-dom';
 import { hot } from 'react-hot-loader'
+import Loadable from 'react-loadable';
 
 import Home from 'containers/Home';
-import About from 'containers/About';
+
+// Lazy loaded component
+// Webpacks uses this as a split point and creates a new chunk.
+const About = Loadable({
+    loader: () => import('./About'),
+    loading: () => <div>Loading.....</div>
+});
 
 class App extends Component {
     render() {

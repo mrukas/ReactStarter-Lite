@@ -48,7 +48,7 @@ module.exports = env => {
                 title: 'React Starter Lite',
                 template: 'src/index.ejs',
                 chunksSortMode: 'manual',
-                chunks: ['runtime', 'vendors', 'app'],
+                chunks: ['runtime', 'styles', 'vendors', 'app'],
                 baseHref: buildConfig.baseHref
             })
             //new BundleAnalyzerPlugin()
