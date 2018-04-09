@@ -1,5 +1,4 @@
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -60,7 +59,6 @@ const prodConfig = merge.strategy({
         }]
     },
     plugins: [
-        new CleanWebpackPlugin([buildConfig.buildDirectory]),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
         }),

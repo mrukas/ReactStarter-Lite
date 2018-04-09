@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const vendors = require('./src/vendors');
@@ -44,6 +45,7 @@ module.exports = env => {
             }
         },
         plugins: [
+            new CleanWebpackPlugin([buildConfig.buildDirectory]),
             new HtmlWebpackPlugin({
                 title: 'React Starter Lite',
                 template: 'src/index.ejs',

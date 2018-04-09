@@ -20,45 +20,48 @@ const devConfig = merge.strategy({
     },
     module: {
         rules: [{
-            test: /\.scss$/,
-            use: [
-                {
-                    loader: 'style-loader',
-                    options: {
-                        sourceMap: true
+                test: /\.scss$/,
+                use: [{
+                        loader: 'style-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }, {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
                     }
-                },
-                {
-                    loader: 'css-loader',
-                    options: {
-                        sourceMap: true
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [{
+                        loader: 'style-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
                     }
-                }, {
-                    loader: 'sass-loader',
-                    options: {
-                        sourceMap: true
-                    }
-                }]
-        },
-        {
-            test: /\.css$/,
-            use: [
-                {
-                    loader: 'style-loader',
-                    options: {
-                        sourceMap: true
-                    }
-                },
-                {
-                    loader: 'css-loader',
-                    options: {
-                        sourceMap: true
-                    }
-                }]
-        }]
+                ]
+            }
+        ]
     },
     plugins: [
-        new WriteFilePlugin(),
+        new WriteFilePlugin({
+            test: /.html$/
+        }),
         new webpack.EvalSourceMapDevToolPlugin({
             columns: false,
             exclude: /node_modules/
