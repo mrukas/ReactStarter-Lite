@@ -12,10 +12,7 @@ module.exports = env => {
 
     return {
         entry: {
-            app: [
-                '@babel/polyfill',
-                './src/index.jsx'
-            ],
+            app: './src/index.jsx',
             vendors: vendors,
         },
         optimization: {
@@ -39,7 +36,8 @@ module.exports = env => {
                         name: 'vendors',
                         test: 'vendors',
                         chunks: 'all',
-                        enforce: true
+                        enforce: true,
+                        priority: -10
                     }
                 }
             }
@@ -66,27 +64,27 @@ module.exports = env => {
         },
         module: {
             rules: [{
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        cacheDirectory: true
+                    test: /\.jsx?$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true
+                        }
                     }
+                },
+                {
+                    test: /\.(png|svg|jpg|gif)$/,
+                    use: [
+                        'file-loader'
+                    ]
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    use: [
+                        'file-loader'
+                    ]
                 }
-            },
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader'
-                ]
-            }
             ]
         }
     }
