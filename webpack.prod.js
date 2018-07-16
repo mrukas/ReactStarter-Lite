@@ -1,4 +1,3 @@
-const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -37,26 +36,6 @@ const prodConfig = merge.strategy({
                 }
             }
         }
-    },
-    module: {
-        rules: [{
-            test: /\.scss$/,
-            use: [
-                MiniCssExtractPlugin.loader,
-                {
-                    loader: 'css-loader'
-                }, {
-                    loader: 'sass-loader'
-                }]
-        },
-        {
-            test: /\.css$/,
-            use: [
-                MiniCssExtractPlugin.loader,
-                {
-                    loader: 'css-loader'
-                }]
-        }]
     },
     plugins: [
         new MiniCssExtractPlugin({

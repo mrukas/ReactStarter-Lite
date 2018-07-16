@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -64,27 +64,66 @@ module.exports = env => {
         },
         module: {
             rules: [{
-                    test: /\.jsx?$/,
-                    exclude: /node_modules/,
-                    use: {
-                        loader: 'babel-loader',
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        cacheDirectory: true
+                    }
+                }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    isProduction ?
+                        MiniCssExtractPlugin.loader :
+                        {
+                            loader: 'style-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                    {
+                        loader: 'css-loader',
                         options: {
-                            cacheDirectory: true
+                            sourceMap: true
+                        }
+                    }, {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
                         }
                     }
-                },
-                {
-                    test: /\.(png|svg|jpg|gif)$/,
-                    use: [
-                        'file-loader'
-                    ]
-                },
-                {
-                    test: /\.(woff|woff2|eot|ttf|otf)$/,
-                    use: [
-                        'file-loader'
-                    ]
-                }
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    isProduction ?
+                        MiniCssExtractPlugin.loader :
+                        {
+                            loader: 'style-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                    {
+                        loader: 'css-loader'
+                    }]
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                ]
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: [
+                    'file-loader'
+                ]
+            }
             ]
         }
     }
