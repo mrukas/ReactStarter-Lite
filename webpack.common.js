@@ -65,7 +65,7 @@ module.exports = env => {
         module: {
             rules: [{
                 test: /\.jsx?$/,
-                exclude: /node_modules/,
+                include: [path.join(__dirname, 'src')],
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -87,12 +87,12 @@ module.exports = env => {
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true
+                            sourceMap: !isProduction
                         }
                     }, {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: true
+                            sourceMap: !isProduction
                         }
                     }
                 ]
@@ -109,7 +109,10 @@ module.exports = env => {
                             }
                         },
                     {
-                        loader: 'css-loader'
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: !isProduction
+                        }
                     }]
             },
             {
