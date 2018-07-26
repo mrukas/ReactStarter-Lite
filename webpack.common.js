@@ -12,7 +12,7 @@ module.exports = env => {
 
     return {
         entry: {
-            app: './src/index.jsx',
+            app: ['@babel/polyfill', './src/index.jsx'],
             vendors: vendors,
         },
         optimization: {
@@ -51,7 +51,7 @@ module.exports = env => {
                 chunks: ['runtime', 'styles', 'vendors', 'app'],
                 baseHref: buildConfig.baseHref
             })
-            //new BundleAnalyzerPlugin()
+            // ,new BundleAnalyzerPlugin()
         ],
         resolve: {
             modules: [path.resolve(__dirname, 'src'), 'node_modules'],
