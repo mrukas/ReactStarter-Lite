@@ -1,6 +1,5 @@
 const presets = [
     "@babel/preset-react",
-    "@babel/preset-stage-3",
     [
         "@babel/preset-env",
         {
@@ -12,7 +11,8 @@ const presets = [
 const plugins = [
     "react-hot-loader/babel",
     "@babel/plugin-proposal-optional-chaining",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-dynamic-import"
 ];
 
 module.exports = {
