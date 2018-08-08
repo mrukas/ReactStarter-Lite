@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const sass2less = require('less-plugin-sass2less')
 
 const vendors = require('./src/vendors');
 
@@ -75,6 +76,7 @@ module.exports = env => {
             },
             {
                 test: /\.scss$/,
+                issuer: /^((?!\.less).)*$/,
                 use: [
                     isProduction ?
                         MiniCssExtractPlugin.loader :
@@ -96,6 +98,32 @@ module.exports = env => {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    isProduction ?
+                        MiniCssExtractPlugin.loader :
+                        {
+                            loader: 'style-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: !isProduction
+                        }
+                    },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: !isProduction,
+                            plugins: [sass2less],
+                            javascriptEnabled: true
+                        }
+                    }]
             },
             {
                 test: /\.css$/,
