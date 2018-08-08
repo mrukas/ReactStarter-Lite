@@ -16,7 +16,10 @@ const devConfig = merge.strategy({
         contentBase: path.join(__dirname, buildConfig.buildDirectory),
         compress: true,
         hot: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        }
     },
     plugins: [
         new WriteFilePlugin({

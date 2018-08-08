@@ -5,6 +5,7 @@ module.exports = (env) => {
         useGitVersions: false,
         buildDirectory: 'dist',
         // This should be the url of the webserver delivering the files.
+        //In this case this is the url of the webpack devserver.
         publicPathDev: 'http://localhost:8080/',
         publicPathProd: '/',
         baseHrefDev: '/',
