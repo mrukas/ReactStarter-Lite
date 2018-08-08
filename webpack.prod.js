@@ -30,7 +30,7 @@ const prodConfig = merge.strategy({
             cacheGroups: {
                 styles: {
                     name: 'styles',
-                    test: /\.s?css$/,
+                    test: /\.(s?css|less)$/,
                     chunks: 'all',
                     enforce: true
                 }
