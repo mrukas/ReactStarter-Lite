@@ -13,34 +13,12 @@ module.exports = env => {
 
     return {
         entry: {
-            app: ['@babel/polyfill', './src/index.jsx'],
-            vendors: vendors,
+            app: ['@babel/polyfill', './src/index.jsx']
         },
         optimization: {
             runtimeChunk: 'single',
             splitChunks: {
-                chunks: 'async',
-                minSize: 30000,
-                minChunks: 1,
-                maxAsyncRequests: 5,
-                maxInitialRequests: 3,
-                automaticNameDelimiter: '~',
-                name: true,
-
-                cacheGroups: {
-                    default: {
-                        minChunks: 2,
-                        priority: -20,
-                        reuseExistingChunk: true
-                    },
-                    vendors: {
-                        name: 'vendors',
-                        test: 'vendors',
-                        chunks: 'all',
-                        enforce: true,
-                        priority: -10
-                    }
-                }
+                chunks: 'all'
             }
         },
         plugins: [
@@ -48,8 +26,8 @@ module.exports = env => {
             new HtmlWebpackPlugin({
                 title: 'React Starter Lite',
                 template: 'src/index.ejs',
-                chunksSortMode: 'manual',
-                chunks: ['runtime', 'styles', 'vendors', 'app'],
+                chunksSortMode: 'dependency',
+                // chunks: ['runtime', 'styles', 'vendors', 'app'],
                 baseHref: buildConfig.baseHref
             })
             // ,new BundleAnalyzerPlugin()

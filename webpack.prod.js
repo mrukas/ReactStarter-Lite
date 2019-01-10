@@ -1,4 +1,4 @@
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const GitRevisionPlugin = require('git-revision-webpack-plugin')
@@ -20,7 +20,7 @@ const prodConfig = merge.strategy({
     mode,
     optimization: {
         minimizer: [
-            new UglifyJSPlugin({
+            new TerserPlugin({
                 cache: true,
                 parallel: true
             }),
