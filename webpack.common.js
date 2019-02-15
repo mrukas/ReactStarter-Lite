@@ -26,7 +26,8 @@ module.exports = env => {
             new HtmlWebpackPlugin({
                 title: 'React Starter Lite',
                 template: 'src/index.ejs',
-                baseHref: buildConfig.baseHref
+                baseHref: buildConfig.baseHref,
+                chunks: ['app']
             })
             // ,new BundleAnalyzerPlugin()
         ],
