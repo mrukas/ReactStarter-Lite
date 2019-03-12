@@ -22,7 +22,7 @@ module.exports = env => {
             }
         },
         plugins: [
-            new CleanWebpackPlugin([buildConfig.buildDirectory]),
+            new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
                 title: 'React Starter Lite',
                 template: 'src/index.ejs',
